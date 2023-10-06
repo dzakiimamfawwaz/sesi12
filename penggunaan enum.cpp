@@ -1,10 +1,19 @@
+/*
+DZAKI IMAM FAWWAZ - 2702367486
+Date    : 02 - okt - 2023
+version : 001.01.002
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+//constanta
 #define MAX_BUKU 100
 #define MAX_STRING_LENGTH 100
 
+//enum penerbit
 typedef enum
 {
     GRAMEDIA,
@@ -13,6 +22,7 @@ typedef enum
     PUSTAKA,
 } PenerbitChoice;
 
+//enum kategori
 typedef enum
 {
     KOMEDI,
@@ -21,6 +31,7 @@ typedef enum
     HOROR,
 } KategoriChoice;
 
+// struct buku
 typedef struct
 {
     int isbn;
@@ -29,9 +40,9 @@ typedef struct
     int tahun_terbit;
     PenerbitChoice penerbit;
     KategoriChoice kategori;
-    // char kategori_buku[MAX_STRING_LENGTH];
 } Buku;
 
+// header function yang diperlukan program 
 void main_menu();
 void add_book(Buku buku[], int *count);
 void display_books(Buku buku[], int count);
@@ -39,12 +50,14 @@ void delete_book(Buku buku[], int *count);
 void clear_screen();
 void thank_you();
 
+// main function 
 int main()
 {
     int pilihan;
     int count = 0;
     Buku daftar_buku[MAX_BUKU];
-
+	
+	// process atau logika untuk main menu
     while (1)
     {
         main_menu();
@@ -76,6 +89,7 @@ int main()
     return 0;
 }
 
+// function main menu
 void main_menu()
 {
     printf("\n==================================================\n");
@@ -90,6 +104,7 @@ void main_menu()
     printf("5. Keluar\n");
 }
 
+// function add book
 void add_book(Buku buku[], int *count)
 {
     if (*count < MAX_BUKU)
@@ -102,13 +117,18 @@ void add_book(Buku buku[], int *count)
             while (getchar() != '\n')
                 ;
         }
+        // menggunakan fgets, agar semua karakter yang diinput user sebelum enter dapat di terima program 
         printf("Masukkan judul buku ke-%d : ", *count + 1);
         getchar();
         fgets(buku[*count].judul, sizeof(buku[*count].judul), stdin);
-        buku[*count].judul[strlen(buku[*count].judul) - 1] = '\0';
+        buku[*count].judul[strlen(buku[*count].judul) - 1] = '\0'; // untuk memberi tahu program, jika user mamasukkan enter maka = '\0'. yaitu tanda akhir dari string.
+        
+        // menggunakan fgets, agar semua karakter yang diinput user sebelum enter dapat di terima program
         printf("Masukkan pengarang buku ke-%d : ", *count + 1);
         fgets(buku[*count].pengarang, sizeof(buku[*count].pengarang), stdin);
-        buku[*count].pengarang[strlen(buku[*count].pengarang) - 1] = '\0';
+        buku[*count].pengarang[strlen(buku[*count].pengarang) - 1] = '\0';// untuk memberi tahu program, jika user mamasukkan enter maka = '\0'. yaitu tanda akhir dari string.
+        
+        // menggunakan scanf untuk tahun terbit
         printf("Masukkan tahun terbit buku ke-%d : ", *count + 1);
         while (scanf("%d", &buku[*count].tahun_terbit) != 1 || buku[*count].tahun_terbit < 0)
         {
@@ -116,7 +136,8 @@ void add_book(Buku buku[], int *count)
             while (getchar() != '\n')
                 ;
         }
-
+		
+		// menggunakan do while dan menu, agar jika user memasukkan kode yang salah maka akan diulang
         do
         {
             printf("\nPilihan Penerbit:\n");
@@ -129,10 +150,11 @@ void add_book(Buku buku[], int *count)
 
             if (buku[*count].penerbit < GRAMEDIA || buku[*count].penerbit > PUSTAKA)
             {
-                printf("\033[31mPilihan penerbit tidak valid.\nHarap masukkan pilihan yang valid.\033[0m\n");
+                printf("\033[31mPilihan penerbit tidak valid.\nHarap masukkan pilihan (0-4).\033[0m\n");
             }
         } while (buku[*count].penerbit < GRAMEDIA || buku[*count].penerbit > PUSTAKA);
-
+		
+		// menggunakan do while dan menu, agar jika user memasukkan kode yang salah maka akan diulang
         do
         {
             printf("\nPilihan Kategori:\n");
@@ -156,10 +178,11 @@ void add_book(Buku buku[], int *count)
     }
     else
     {
-        printf("Daftar buku sudah penuh. Tidak bisa menambahkan lebih banyak buku.\n");
+        printf("Daftar buku sudah penuh. Tidak bisa menambahkan lebih banyak buku.\n"); // max 100 buku
     }
 }
 
+// function display book
 void display_books(Buku buku[], int count)
 {
     if (count == 0)
@@ -222,6 +245,7 @@ void display_books(Buku buku[], int count)
     }
 }
 
+// function delete book
 void delete_book(Buku buku[], int *count)
 {
     if (*count > 0)
@@ -250,12 +274,14 @@ void delete_book(Buku buku[], int *count)
     }
 }
 
+// function clear screen
 void clear_screen()
 {
     printf("\033[2J");
     printf("\033[H");
 }
 
+// function terima kasih
 void thank_you()
 {
     printf("\n----------------------------------\n");
@@ -263,4 +289,3 @@ void thank_you()
     printf("   Semoga harimu menyenangkan :)\n");
     printf("----------------------------------\n");
 }
-
