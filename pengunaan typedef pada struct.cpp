@@ -22,7 +22,7 @@ int main()
     strcpy(mahasiswa1.nama, "Dzaki Imam F");
     mahasiswa1.nik = 2702367486;
 
-	// tidak menggunakan typedef seikit sulit dipahami dan tidak efisien
+	// tidak menggunakan typedef sedikit sulit dipahami dan tidak efisien
     struct dosen dosen1; 
     strcpy(dosen1.nama, "Pak Tri Asih");
     strcpy(dosen1.nip, "D3783");
