@@ -25,10 +25,11 @@ typedef enum
 //enum kategori
 typedef enum
 {
-    KOMEDI,
-    ILMU_PENGETAHUAN,
-    ROMANTIS,
-    HOROR,
+	Buku_Fiksi,
+	Buku_Teks, 
+	Buku_Sejarah, 
+	Buku_Novel
+    
 } KategoriChoice;
 
 // struct buku
@@ -145,12 +146,12 @@ void add_book(Buku buku[], int *count)
             printf("1. Elexmedia\n");
             printf("2. Andi Offset\n");
             printf("3. Pustaka\n");
-            printf("\033[36mMasukkan penerbit buku ke-%d (1-4): \033[0m", *count + 1);
+            printf("\033[36mMasukkan penerbit buku ke-%d (0-3): \033[0m", *count + 1);
             scanf("%d", (int *)&buku[*count].penerbit);
 
             if (buku[*count].penerbit < GRAMEDIA || buku[*count].penerbit > PUSTAKA)
             {
-                printf("\033[31mPilihan penerbit tidak valid.\nHarap masukkan pilihan (0-4).\033[0m\n");
+                printf("\033[31mPilihan penerbit tidak valid.\nHarap masukkan pilihan (0-3).\033[0m\n");
             }
         } while (buku[*count].penerbit < GRAMEDIA || buku[*count].penerbit > PUSTAKA);
 		
@@ -158,18 +159,18 @@ void add_book(Buku buku[], int *count)
         do
         {
             printf("\nPilihan Kategori:\n");
-            printf("0. Komedi\n");
-            printf("1. Ilmu Pengetahuan\n");
-            printf("2. Romantis\n");
-            printf("3. Horor\n");
-            printf("\033[36mMasukkan kategori buku ke-%d (1-4): \033[0m", *count + 1);
+            printf("0. Buku Fiksi\n");
+            printf("1. Buku Teks\n");
+            printf("2. Buku Sejarah\n");
+            printf("3. Buku Novel\n");
+            printf("\033[36mMasukkan kategori buku ke-%d (0-3):\033[0m", *count + 1);
             scanf("%d", (int *)&buku[*count].kategori);
 
-            if (buku[*count].kategori < KOMEDI || buku[*count].kategori > HOROR)
+            if (buku[*count].kategori < Buku_Fiksi || buku[*count].kategori > Buku_Novel)
             {
-                printf("Pilihan kategori tidak valid.\nHarap masukkan pilihan yang valid.\n");
+                printf("\033[31mPilihan penerbit tidak valid.\nHarap masukkan pilihan (0-3).\033[0m\n");
             }
-        } while (buku[*count].kategori < KOMEDI || buku[*count].kategori > HOROR);
+        } while (buku[*count].kategori < Buku_Fiksi || buku[*count].kategori > Buku_Novel);
 
         (*count)++;
         printf("\n-----------------------------------");
@@ -219,22 +220,22 @@ void display_books(Buku buku[], int count)
                 printf("Tidak Diketahui\n");
                 break;
             }
-
+            
             printf("kategori: ");
 
             switch (buku[i].kategori)
             {
-            case KOMEDI:
-                printf("Komedi\n");
+            case Buku_Fiksi:
+                printf("Buku Fiksi\n");
                 break;
-            case ILMU_PENGETAHUAN:
-                printf("Ilmu Pengatahuan\n");
+            case Buku_Teks:
+                printf("Buku Teks\n");
                 break;
-            case ROMANTIS:
-                printf("Romantis\n");
+            case Buku_Sejarah:
+                printf("Buku Sejarah\n");
                 break;
-            case HOROR:
-                printf("Horor\n");
+            case Buku_Novel:
+                printf("Buku Novel\n");
                 break;
             default:
                 printf("Tidak Diketahui\n");
